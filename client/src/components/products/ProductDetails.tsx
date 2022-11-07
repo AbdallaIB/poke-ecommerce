@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from '@components/shared/Button';
+import Button from '@components/shared/button';
 import ProductInfo from '@components/products/ProductInfo';
 import ProductForm from '@components/products/ProductForm';
 import { Link } from 'react-router-dom';

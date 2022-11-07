@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Button from '@components/shared/Button';
+import Button from '@components/shared/button';
 import useCartStore from '@lib/stores/cart';
 import { PokemonVariants } from '@api/types';
 
