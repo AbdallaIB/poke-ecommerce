@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "@routes/*": ["src/routes/*"],
+      "@utils/*": ["src/utils/*"],
+      "@config/*": ["src/config/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@thirdParty/*": ["src/thirdParty/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@shared/*": ["src/shared/*"],
+      "@services/*": ["src/services/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "app.ts", "../client/src/utils/helpers.ts"],
+  "exclude": ["node_modules"]
+}
