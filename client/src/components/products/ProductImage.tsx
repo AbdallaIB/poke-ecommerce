@@ -26,7 +26,7 @@ const ProductImage = ({ variants, onVariantSelected, variantId }: Props) => {
 
   return (
     <div className="w-full md:w-1/2 max-w-md border border-palette-lighter bg-white rounded shadow-lg h-[65vh]">
-      <div className="relative flex items-center justify-center h-5/12" style={{ height: '65%' }}>
+      <div className="relative flex items-center justify-center h-5/12 p-4" style={{ height: '65%' }}>
         <img
           src={mainImg}
           alt={mainImg}
@@ -36,10 +36,10 @@ const ProductImage = ({ variants, onVariantSelected, variantId }: Props) => {
       <div className="relative flex border-t border-palette-lighter" style={{ height: '35%' }}>
         <button
           aria-label="left-scroll"
-          className="h-32 bg-palette-lighter hover:bg-palette-light absolute left-0 z-10 opacity-75"
+          className="h-full bg-palette-lighter hover:bg-palette-light absolute left-0 z-10 opacity-75"
           onClick={() => scroll(-300)}
         >
-          <i className="bx bx-left-arrow-alt"></i>
+          <i className="bx bx-left-arrow-alt text-main"></i>
         </button>
         <div
           ref={ref}
@@ -58,10 +58,10 @@ const ProductImage = ({ variants, onVariantSelected, variantId }: Props) => {
         </div>
         <button
           aria-label="right-scroll"
-          className="h-32 bg-palette-lighter hover:bg-palette-light absolute right-0 z-10 opacity-75"
+          className="h-full bg-palette-lighter hover:bg-palette-light absolute right-0 z-10 opacity-75"
           onClick={() => scroll(300)}
         >
-          <i className="bx bx-right-arrow-alt"></i>
+          <i className="bx bx-right-arrow-alt text-main"></i>
         </button>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { Product } from '@api/types';
 import useToast from '@lib/hooks/useToast';
 import Loader from '@components/loader';
 import useProductStore from '@lib/stores/product';
+import Pokeball from '@assets/pokeball.png';
 
 const IndexPage = () => {
   const { errorMessage } = useToast();
@@ -62,10 +63,13 @@ const IndexPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full bg-gray-50">
-      <h1 className="leading-relaxed font-primary font-extrabold text-4xl text-center text-palette-primary mt-4 py-2 sm:py-4">
-        Products
+    <div className="flex flex-col items-center justify-center w-full">
+      <h1 className="leading-relaxed font-primary font-extrabold text-4xl text-center text-palette-primary mt-4 py-2 sm:py-4 text-main">
+        Get your favorite Pokemon!
       </h1>
+      <div className="flex flex-row gap-1 mb-8 text-main_dark">
+        The perfect place to catch them all. <img className="w-4 object-contain" alt="pokeball" src={Pokeball}></img>{' '}
+      </div>
       <div className="flex flex-row items-center justify-center gap-6">
         <SearchBar value={query} setValue={(e) => setQuery(e.toLowerCase())} placeholder={'Search for a Pokemon'} />
         <Filter items={filterItems} setFilter={setFilter}></Filter>

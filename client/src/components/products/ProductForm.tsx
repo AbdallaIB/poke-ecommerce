@@ -31,16 +31,18 @@ const ProductForm = ({ title, id, variants, setVariantPrice, mainImg, variantId,
   };
 
   useEffect(() => {
+    setVariant(variants[variantId]);
     console.log(variantId);
   }, [variantId]);
 
   const handleAddToCart = async () => {
     const varId = variant.id;
+    console.log('handleAddToCart', variant);
     // update store context
     addToCart({
       productId: id,
       productTitle: title,
-      productImage: mainImg,
+      productImage: variant.image,
       variantId: varId,
       variantPrice: variant.price,
       variantTitle: variant.title,
@@ -66,7 +68,7 @@ const ProductForm = ({ title, id, variants, setVariantPrice, mainImg, variantId,
             step="1"
             value={quantity}
             onChange={(e) => updateQuantity(e.target.value)}
-            className="block w-12 h-full py-1 px-2 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block w-12 h-full py-1 px-2 text-sm text-gray-900 bg-white rounded-lg border border-main focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
         <div className="flex flex-col items-start space-y-1 flex-grow">
@@ -76,7 +78,7 @@ const ProductForm = ({ title, id, variants, setVariantPrice, mainImg, variantId,
             name="size-selector"
             onChange={(event) => handleSizeChange(event.target.value)}
             value={variantId}
-            className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            className="inline-flex w-full items-center text-gray-500 bg-white border border-main focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
           >
             {variants.map((item) => (
               <option

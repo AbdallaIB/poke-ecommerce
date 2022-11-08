@@ -7,10 +7,9 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { errorMessage } = useToast();
-  const { getCart } = useCartStore();
+  const { cart } = useCartStore();
 
   const handleCheckout = async () => {
-    const cart = getCart();
     if (!cart || cart.length === 0) return;
     try {
       const checkoutSession = await createCheckoutSession(cart);
@@ -25,7 +24,8 @@ const Cart = () => {
       <h1 className="leading-relaxed font-primary font-extrabold text-4xl text-center text-palette-primary mt-4 py-2 sm:py-4">
         Your Cart
       </h1>
-      <CartTable cart={getCart()}></CartTable>
+      <CartTable cart={cart}></CartTable>
+      {cart.length === 0 && <div className="text-center my-12 font-semibold w-full">Your cart is empty</div>}
       <div className="flex flex-col w-full items-center justify-center gap-4 px-2">
         <Button
           onClick={handleCheckout}

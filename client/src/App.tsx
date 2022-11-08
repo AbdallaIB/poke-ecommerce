@@ -4,7 +4,7 @@ import './App.css';
 
 const App = () => {
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full bg-gray-50">
+    <div className="flex flex-col items-center justify-start w-full h-full">
       <Nav />
       <Routes />
     </div>
