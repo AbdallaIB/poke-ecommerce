@@ -1,5 +1,3 @@
-import { getCart } from '@utils/pokemon';
-import { saveCart } from '@utils/pokemon';
 import create from 'zustand';
 
 export type Cart = {
@@ -14,18 +12,21 @@ export type Cart = {
 
 type CartStore = {
   cart: Cart[];
-  getCart: () => Cart[];
   addToCart: (newItem: Cart) => void;
   updateCartItemQuantity: (id: number, quantity: number) => void;
 };
 
+const getLocalStorage = (key: string) => JSON.parse(localStorage.getItem(key) || '[]');
+const setLocalStorage = (key: string, value: any) => localStorage.setItem(key, JSON.stringify(value));
+
 const useCartStore = create<CartStore>((set, get) => ({
-  cart: [],
-  getCart: () => (getCart().length === 0 ? getCart() : get().cart),
+  cart: getLocalStorage('cart') || [],
   addToCart: (newItem) => {
     // empty cart
     const { cart } = get();
     if (cart.length === 0) {
+      setLocalStorage('cart', [...cart, newItem]);
+
       set((state) => ({
         ...state,
         cart: [...cart, newItem],
@@ -48,7 +49,8 @@ const useCartStore = create<CartStore>((set, get) => ({
         newCartWithItem = [...newCart, newItem];
       }
 
-      saveCart(newCartWithItem);
+      setLocalStorage('cart', newCartWithItem);
+
       set((state) => ({
         ...state,
         cart: newCartWithItem,
@@ -70,6 +72,7 @@ const useCartStore = create<CartStore>((set, get) => ({
 
     // take out zeroes items
     newCart = newCart.filter((i) => i.variantQuantity !== 0);
+    setLocalStorage('cart', newCart);
     set((state) => ({
       ...state,
       cart: newCart,
