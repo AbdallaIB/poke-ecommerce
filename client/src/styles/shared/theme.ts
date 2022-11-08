@@ -1,9 +1,9 @@
 const theme = {
   colors: {
-    main: '#B457F2',
-    white: '#F2F2F2',
-    main_side: '#A42EF2',
-    main_dark: '#291840',
+    main: '#04C4D9',
+    light: '#05E6FF',
+    main_side: '#05DBF2',
+    main_dark: '#026873',
   },
   screens: {
     xs: '@media(max-width: 576px)',
