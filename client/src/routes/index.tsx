@@ -1,6 +1,7 @@
 import Cart from '@pages/Cart';
 import IndexPage from '@pages/index';
 import Page404 from '@pages/Page404';
+import Payment from '@pages/Payment';
 import Product from '@pages/Product';
 import { PathRouteProps, Routes as Switch, Route } from 'react-router-dom';
 
@@ -14,6 +15,11 @@ interface AppRoute extends PathRouteProps {
 }
 export const AppRoutes: AppRoute[] = [
   // Public Routes
+  {
+    type: RouteType.PUBLIC,
+    path: 'payment/:result',
+    children: <Payment />,
+  },
   {
     type: RouteType.PUBLIC,
     path: 'cart',
