@@ -1,7 +1,7 @@
 import { apiRequest } from '@api/index';
 import { Product } from '@api/types';
-import { capitalize, getRandomInteger } from '@utils/helpers';
-import { getPokemonImages, getPokemonTypes, getPokemonVariants, typeColor } from '@utils/pokemon';
+import { capitalize } from '@utils/helpers';
+import { getPokemonImages, getPokemonPrice, getPokemonTypes, getPokemonVariants, typeColor } from '@utils/pokemon';
 import toast from 'react-hot-toast';
 
 const existingIds: number[] = [];
@@ -53,10 +53,10 @@ export const getTenPokemon = async () => {
 
 const formatPokemonData = (data: any) => {
   const images = getPokemonImages(data.sprites.other);
-  const price = getRandomInteger(10, 100);
+  const price = getPokemonPrice(data);
   const variants = getPokemonVariants(images, price);
   const obj: Product = {
-    id: data.id,
+    id: parseInt(data.id),
     healthPoints: data.stats[0].base_stat,
     title: capitalize(data.name),
     types: getPokemonTypes(data.types),

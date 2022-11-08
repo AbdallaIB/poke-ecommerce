@@ -75,8 +75,6 @@ export const getPokemonImages = (obj: any): string[] => {
           .map(getObjValues)
           .reduce((a: any, b) => a.concat(b), [])
       : [obj];
-  console.log(getObjValues(obj).filter((item: any) => typeof item === 'string'));
-
   return getObjValues(obj).filter((item: any) => typeof item === 'string');
 };
 
@@ -84,22 +82,29 @@ export const getPokemonVariants = (images: string[], price: number): PokemonVari
   const variants: PokemonVariants[] = [];
   const imageTypes: string[] = ['Default', 'Dream World', 'Home', 'Home - Shiny', 'Artwork'];
   imageTypes.forEach((item, index) => {
-    if (images[index])
+    if (images[index]) {
+      const variantPrice =
+        index === 0
+          ? price
+          : index === 1
+          ? formatVariantPrice(price * (index + 1) * 0.65)
+          : formatVariantPrice(price * (index + 1) * 0.5);
       variants.push({
         id: index,
         title: item,
-        price: price * index * 0.5,
+        price: variantPrice,
         image: images[index],
       });
+    }
   });
   return variants;
 };
 
-export const saveCart = (cart: Cart[]) => {
-  localStorage.setItem('cart', JSON.stringify(cart));
+const formatVariantPrice = (price: number) => {
+  return Math.round(price) - 0.01;
 };
 
-export const getCart = (): Cart[] => {
-  const cart = localStorage.getItem('cart');
-  return cart ? JSON.parse(cart) : [];
+export const getPokemonPrice = (data: any) => {
+  const price = data.stats[1].base_stat * 0.2 + data.stats[2].base_stat * 0.5 + data.stats[5].base_stat * 0.5;
+  return formatVariantPrice(price);
 };
