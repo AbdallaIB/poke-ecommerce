@@ -38,8 +38,8 @@ export class StripeController {
             quantity: item.variantQuantity,
           };
         }),
-        success_url: `${config.react_client_origin}/cart`,
-        cancel_url: `${config.react_client_origin}/cart`,
+        success_url: `${config.react_client_origin}/payment/success`,
+        cancel_url: `${config.react_client_origin}/payment/cancel`,
       });
       return res.status(statusCodes.OK).json({ url: session.url });
     } catch (error) {
