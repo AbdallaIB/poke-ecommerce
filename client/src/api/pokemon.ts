@@ -23,21 +23,26 @@ export const getPokemonById = async (id: number) => {
 
 export const getTenPokemon = async () => {
   console.info('[getTenPokemon]');
+  const dataPromises = [];
   const data: Product[] = [];
   let count = 1;
   // Generate a random number between 1 and 150
   let id = Math.floor(Math.random() * 150) + 1;
   try {
-    while (count < 10) {
+    while (count < 10 || dataPromises.length < 10) {
       // Check if the pokemon is already in the list
       if (!existingIds.includes(id)) {
         existingIds.push(id);
-        const pokemon = await fetchPokemonById(id);
-        data.push(formatPokemonData(pokemon));
+        dataPromises.push(fetchPokemonById(id));
         count++;
         id = Math.floor(Math.random() * 150) + 1;
       }
     }
+    const pokemonData = await Promise.all(dataPromises);
+    pokemonData.forEach((pokemon) => {
+      data.push(formatPokemonData(pokemon));
+    });
+    console.log('[getTenPokemon][data]', data);
     return data;
   } catch (error) {
     console.error('[getTenPokemon][err]', error);
